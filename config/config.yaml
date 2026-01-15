@@ -1,0 +1,37 @@
+simulation:
+  concurrent_sessions: 5
+  total_sessions: 100
+  session_duration_range: [30, 180]  # seconds
+  clicks_per_session_range: [2, 8]
+
+ip_pool:
+  source: "config/ips.csv"
+  rotation_strategy: "weighted"  # round-robin, random, weighted
+  reputation_threshold: 0.7
+  max_requests_per_ip: 1000
+
+behavior:
+  dwell_time_mean: 45  # seconds
+  dwell_time_stddev: 15
+  scroll_probability: 0.8
+  click_delay_range: [1, 5]
+  search_queries:
+    - "best running shoes 2026"
+    - "python tutorial for beginners"
+    - "weather forecast today"
+    - "how to cook pasta"
+    - "best laptop 2026"
+    - "digital marketing strategies"
+    - "healthy meal prep ideas"
+    - "cryptocurrency investment guide"
+    - "machine learning basics"
+    - "travel destinations 2026"
+
+logging:
+  database: "data/events.db"
+  log_level: "INFO"
+  log_file: "logs/bot.log"
+
+dashboard:
+  type: "cli"  # cli or web
+  refresh_rate: 2  # seconds
