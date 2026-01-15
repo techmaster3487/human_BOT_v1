@@ -3,7 +3,7 @@ REM Human B.O.T MVP Initialization Script (Windows)
 REM Usage: init.bat
 
 echo.
-echo 🤖 Human B.O.T MVP - Initialization Script
+echo Human B.O.T MVP - Initialization Script
 echo ==========================================
 echo.
 
@@ -11,7 +11,7 @@ REM Check Python installation
 echo 🔍 Checking Python version...
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
-    echo ❌ Python is not installed or not in PATH.
+    echo Python is not installed or not in PATH.
     echo Please install Python 3.11 or higher from https://www.python.org/
     pause
     exit /b 1
@@ -22,7 +22,7 @@ python --version
 echo.
 
 REM Create directory structure
-echo 📁 Creating directory structure...
+echo  Creating directory structure...
 if not exist "config" mkdir config
 if not exist "data" mkdir data
 if not exist "logs" mkdir logs
@@ -33,11 +33,11 @@ if not exist "core" mkdir core
 if not exist "ip_management" mkdir ip_management
 if not exist "logging" mkdir logging
 
-echo ✅ Directories created
+echo  Directories created
 echo.
 
 REM Create __init__.py files
-echo 📝 Creating Python package files...
+echo  Creating Python package files...
 type nul > core\__init__.py
 type nul > ip_management\__init__.py
 type nul > event_logging\__init__.py
@@ -45,34 +45,34 @@ type nul > dashboard\__init__.py
 type nul > tests\__init__.py
 type nul > demo\__init__.py
 
-echo ✅ Package files created
+echo  Package files created
 echo.
 
 REM Create virtual environment
-echo 🐍 Creating virtual environment...
+echo Creating virtual environment...
 if exist "venv" (
     echo ⚠️  Virtual environment already exists. Skipping creation.
 ) else (
     python -m venv venv
-    echo ✅ Virtual environment created
+    echo  Virtual environment created
 )
 echo.
 
 REM Activate virtual environment
-echo ✅ Activating virtual environment...
+echo  Activating virtual environment...
 call venv\Scripts\activate.bat
 
 REM Upgrade pip
-echo ⬆️  Upgrading pip...
+echo  Upgrading pip...
 python -m pip install --upgrade pip --quiet
 
 REM Install dependencies
 echo 📦 Installing dependencies...
 if exist "requirements.txt" (
     pip install -r requirements.txt --quiet
-    echo ✅ Dependencies installed
+    echo  Dependencies installed
 ) else (
-    echo ⚠️  requirements.txt not found. Skipping dependency installation.
+    echo  requirements.txt not found. Skipping dependency installation.
 )
 echo.
 
@@ -227,7 +227,7 @@ echo ==========================================
 echo ✅ Initialization complete!
 echo ==========================================
 echo.
-echo 📊 Project Structure:
+echo  Project Structure:
 echo    ├── config\           ✅ Configuration files
 echo    ├── core\             ✅ Core simulation engine
 echo    ├── ip_management\    ✅ IP rotation system

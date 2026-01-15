@@ -17,15 +17,8 @@ behavior:
   click_delay_range: [1, 5]
   search_queries:
     - "aseraffles.com"
-    # - "python tutorial for beginners"
-    # - "weather forecast today"
-    # - "how to cook pasta"
-    # - "best laptop 2026"
-    # - "digital marketing strategies"
-    # - "healthy meal prep ideas"
-    # - "cryptocurrency investment guide"
-    # - "machine learning basics"
-    # - "travel destinations 2026"
+    - "python tutorial for beginners"
+    - "weather forecast today"
 
 logging:
   database: "data/events.db"
