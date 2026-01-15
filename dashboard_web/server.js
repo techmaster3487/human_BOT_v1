@@ -1,5 +1,8 @@
 /**
- * Human B.O.T Web Dashboard - Node.js Backend
+ * Human B.O.T Dashboard - API Backend Server
+ * 
+ * This is a backend-only API server that provides REST endpoints and WebSocket
+ * connections for the React frontend dashboard.
  * 
  * Installation:
  * npm init -y
@@ -19,9 +22,8 @@ const app = express();
 const PORT = 3000;
 
 // Middleware
-app.use(cors());
+app.use(cors()); // Enable CORS for React frontend
 app.use(express.json());
-app.use(express.static('public'));
 
 // Database connection
 const DB_PATH = path.join(__dirname, '..', 'data', 'events.db');
@@ -336,6 +338,22 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+// 404 handler for non-API routes
+app.use((req, res) => {
+    if (!req.path.startsWith('/api')) {
+        res.status(404).json({
+            error: 'Not Found',
+            message: 'This is an API-only server. Please use the React frontend dashboard.',
+            availableEndpoints: '/api/stats/summary, /api/stats/ip-pool, /api/events/recent, etc.'
+        });
+    } else {
+        res.status(404).json({
+            error: 'Not Found',
+            message: 'API endpoint not found'
+        });
+    }
+});
+
 // ============================================================================
 // WEBSOCKET FOR REAL-TIME UPDATES
 // ============================================================================
@@ -385,24 +403,25 @@ setInterval(() => {
 
 const server = app.listen(PORT, () => {
     console.log('');
-    console.log('🤖 Human B.O.T Web Dashboard');
+    console.log('🤖 Human B.O.T Dashboard - API Backend');
     console.log('========================================');
-    console.log(`✅ Server running on http://localhost:${PORT}`);
-    console.log(`✅ WebSocket available for real-time updates`);
+    console.log(`✅ API Server running on http://localhost:${PORT}`);
+    console.log(`✅ WebSocket available at ws://localhost:${PORT}`);
     console.log('========================================');
     console.log('');
-    console.log('📊 Available endpoints:');
+    console.log('📊 Available API endpoints:');
     console.log('   GET  /api/stats/summary');
     console.log('   GET  /api/stats/ip-pool');
     console.log('   GET  /api/events/recent?limit=50');
     console.log('   GET  /api/events/by-type');
     console.log('   GET  /api/stats/sessions');
     console.log('   GET  /api/stats/hourly?hours=24');
+    console.log('   GET  /api/stats/interval-10s?minutes=10');
     console.log('   GET  /api/session/:id');
     console.log('   GET  /api/stats/top-queries?limit=10');
     console.log('   GET  /api/health');
     console.log('');
-    console.log('🌐 Open browser: http://localhost:3000');
+    console.log('💡 Connect your React frontend to http://localhost:3000/api');
     console.log('');
 });
 
